@@ -120,7 +120,7 @@ $conn->close();
                     <!-- Buttons -->
                     <div class="col-12 text-center mt-4">
                         <a class="btn btn-success px-4"
-                           href="http://localhost/project/college/student/table.php">
+                           href="table.php">
                             Back
                         </a>
                     </div>

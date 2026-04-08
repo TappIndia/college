@@ -1,10 +1,16 @@
 <?php
+session_start();
 // Include database connection
 include("../db.php");
 
 // Fetch all student records
 $sql = "SELECT * FROM student ORDER BY id ASC";
 $result = $conn->query($sql);
+
+// Retrieve session feedback message, if any
+$flashMessage = $_SESSION['message'] ?? null;
+$flashType = $_SESSION['message_type'] ?? 'info';
+unset($_SESSION['message'], $_SESSION['message_type']);
 ?>
 
 <!doctype html>
@@ -49,10 +55,18 @@ $result = $conn->query($sql);
                     Student - Record List
                 </h3>
 
+                <!-- Flash Message -->
+                <?php if (!empty($flashMessage)): ?>
+                    <div class="alert alert-<?= htmlspecialchars($flashType) ?> alert-dismissible fade show" role="alert">
+                        <?= htmlspecialchars($flashMessage) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Add Button -->
                 <div class="d-flex justify-content-between mb-3">
                     <a class="btn btn-success"
-                       href="http://localhost/project/college/student/add.php">
+                       href="add.php">
                         + Add
                     </a>
                 </div>

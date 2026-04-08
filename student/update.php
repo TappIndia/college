@@ -6,13 +6,13 @@ include("../db.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get and sanitize form data
     $id      = (int)($_POST['id'] ?? 0);
-    $name    = $_POST['name'] ?? '';
-    $mobile  = $_POST['mobile'] ?? '';
-    $address = $_POST['address'] ?? '';
-    $gender  = $_POST['gender'] ?? '';
-    $dob     = $_POST['dob'] ?? '';
-    $father  = $_POST['father'] ?? '';
-    $mother  = $_POST['mother'] ?? '';
+    $name    = $conn->real_escape_string(trim($_POST['name'] ?? ''));
+    $mobile  = $conn->real_escape_string(trim($_POST['mobile'] ?? ''));
+    $address = $conn->real_escape_string(trim($_POST['address'] ?? ''));
+    $gender  = $conn->real_escape_string(trim($_POST['gender'] ?? ''));
+    $dob     = $conn->real_escape_string(trim($_POST['dob'] ?? ''));
+    $father  = $conn->real_escape_string(trim($_POST['father'] ?? ''));
+    $mother  = $conn->real_escape_string(trim($_POST['mother'] ?? ''));
 
     // Update query
     $sql = "UPDATE student SET 
@@ -36,8 +36,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close connection
 $conn->close();
-?>
-
-
-   
 ?>

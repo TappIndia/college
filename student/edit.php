@@ -140,7 +140,7 @@ if ($result_data && $result_data->num_rows > 0) {
 
                         <!-- View Data -->
                         <a class="btn btn-success px-4"
-                           href="http://localhost/project/college/student/table.php">
+                           href="table.php">
                             Back
                         </a>
 

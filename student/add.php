@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Include database connection
 include("../db.php");
 
@@ -12,6 +13,10 @@ if ($result && $result->num_rows > 0) {
 } else {
     $maxid = 1;
 }
+
+$flashMessage = $_SESSION['message'] ?? null;
+$flashType = $_SESSION['message_type'] ?? 'info';
+unset($_SESSION['message'], $_SESSION['message_type']);
 ?>
 
 <!doctype html>
@@ -48,6 +53,14 @@ if ($result && $result->num_rows > 0) {
                 <h2 class="text-center mb-4">
                     <u>Student - Add Record</u>
                 </h2>
+
+                <!-- Flash Message -->
+                <?php if (!empty($flashMessage)): ?>
+                    <div class="alert alert-<?= htmlspecialchars($flashType) ?> alert-dismissible fade show" role="alert">
+                        <?= htmlspecialchars($flashMessage) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
 
                 <!-- Form -->
                 <form class="row g-3" action="create.php" method="post">
@@ -125,7 +138,7 @@ if ($result && $result->num_rows > 0) {
 
                         <!-- View Data -->
                         <a class="btn btn-success px-4"
-                           href="http://localhost/project/college/student/table.php">
+                           href="table.php">
                             View
                         </a>
 
